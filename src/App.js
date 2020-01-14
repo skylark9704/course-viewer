@@ -1,30 +1,20 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./components/navbar/Navbar";
+import Courses from './components/courses/Courses'
 
 export default function App() {
+
+  let navItems = [
+    {label:"Home", route:'/', exact:true},
+    {label:"Courses", route:'/courses'},
+    {label:"About",route:'/about'}
+  ]
   return (
     <Router>
       <div className="container">
-        <div className="nav">
-          <NavLink exact activeClassName="nav-active" to="/">
-            Home
-          </NavLink>
-          |
-          <NavLink activeClassName="nav-active" to="/about">
-            About
-          </NavLink>
-          |
-          <NavLink activeClassName="nav-active" to="/courses">
-            Courses
-          </NavLink>
-        </div>
+        <Navbar items={navItems} />
         <Switch>
           <Route exact path="/">
             <Home />
@@ -68,10 +58,6 @@ function About() {
       </p>
     </div>
   );
-}
-
-function Courses() {
-  return <h2>Courses</h2>;
 }
 
 function PageNotFound() {
