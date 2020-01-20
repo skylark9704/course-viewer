@@ -1,29 +1,11 @@
 import React from "react";
+import {Link} from "react-router-dom"
 function AddCourse(props) {
-  const {add} = props
-  let course = "";
-
-  const handleChange = e => {
-    course = e.target.value;
-  };
-
-  const addCourse = e => {
-    add(course);
-    course = "";
-    e.target.reset();
-    e.preventDefault();
-  };
-
   return (
     <div>
-      <h4>Add Course</h4>
-      <hr />
-      <form onSubmit={e => addCourse(e)}>
-        <input type="text" onChange={e => handleChange(e)} />
-        <button type="submit" className="btn btn-primary btn-sm">
-          Add
-        </button>
-      </form>
+      <Link to='/course/' className="btn btn-primary">
+        Add Course
+      </Link>
     </div>
   );
 }

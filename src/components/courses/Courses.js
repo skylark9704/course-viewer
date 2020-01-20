@@ -20,6 +20,8 @@ class Courses extends React.Component {
       <div>
         <h2>Courses</h2>
         <hr />
+        <AddCourse/>
+        <br />
         <CourseList items={this.props.courses} />
       </div>
     );
