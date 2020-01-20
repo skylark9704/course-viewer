@@ -1,35 +1,39 @@
-import React, { Component } from "react";
+import React from "react";
 import AddCourse from "./AddCourses";
 import CourseList from "./CourseList";
+import { connect } from "react-redux";
+import { addCourse } from "../../redux/actions";
 
-export default class Courses extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      courses: ["React", "Redux"]
-    };
-  }
-
-  addCourse = value => {
-    if (value) {
-      const courses = this.state.courses.slice();
-      courses.push(value);
-      this.setState({ courses });
+class Courses extends React.Component {
+  add = course => {
+    if (course) {
+      this.props.addCourse(course);
     }
   };
 
   render() {
-    const { courses } = this.state;
-
     return (
       <div>
         <h2>Courses</h2>
         <hr />
-        <CourseList courses={courses} />
+        <CourseList items={this.props.courses} />
         <br />
-        <AddCourse add={this.addCourse} />
+        <AddCourse add={this.add} />
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    courses: state.courses
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addCourse: course => dispatch(addCourse(course))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Courses);

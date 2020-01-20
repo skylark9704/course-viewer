@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/navbar/Navbar";
 import Courses from './components/courses/Courses'
 
-export default function App() {
+function App() {
 
   let navItems = [
     {label:"Home", route:'/', exact:true},
@@ -19,7 +19,7 @@ export default function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/about">
+          <Route exact path="/about">
             <About />
           </Route>
           <Route path="/courses">
@@ -39,7 +39,7 @@ function Home() {
     <div className="jumbotron">
       <h1 className="display-4">Pluralsight Administration</h1>
       <p className="lead">
-        Lean React, Redux and React router for fast performing Web Applications
+        Learn React, Redux and React Router for fast performing Web Applications
       </p>
       <Link className="btn btn-primary" to="/about">
         Learn More
@@ -61,10 +61,9 @@ function About() {
 }
 
 function PageNotFound() {
-  setTimeout(() => {
-    window.location.href = "/";
-  }, 3000);
   return (
-    <h2>Oopsie! Page Not Found, You will be redirected to home in 3 seconds</h2>
+    <h2>Oopsie! Page Not Found! Please check your URL.</h2>
   );
 }
+
+export default App;

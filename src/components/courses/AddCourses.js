@@ -1,6 +1,6 @@
 import React from "react";
-
-export default function AddCourse(props) {
+function AddCourse(props) {
+  const {add} = props
   let course = "";
 
   const handleChange = e => {
@@ -8,7 +8,7 @@ export default function AddCourse(props) {
   };
 
   const addCourse = e => {
-    props.add(course);
+    add(course);
     course = "";
     e.target.reset();
     e.preventDefault();
@@ -27,3 +27,5 @@ export default function AddCourse(props) {
     </div>
   );
 }
+
+export default AddCourse;
