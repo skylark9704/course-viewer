@@ -24,9 +24,7 @@ function CourseList(props) {
         {items &&
           items.map((elem, index) => (
             <CourseItem
-              title={elem.title}
-              authorId={elem.authorId}
-              category={elem.category}
+              course = {elem}
               key={index}
             />
           ))}
