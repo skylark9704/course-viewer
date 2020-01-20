@@ -1,6 +1,7 @@
 /* eslint-disable default-case */
 let initialState = {
-    courses : ['React','Redux']
+    courses : [],
+    loading: false
 }
 const courseReducer = (state = initialState,action) => {
     const {type, payload} = action
@@ -14,6 +15,24 @@ const courseReducer = (state = initialState,action) => {
             return {
                 ...state,
                 courses : newCourses
+            }
+
+        case 'GET_COURSES':
+            return {
+                ...state,
+                loading:true
+            }
+
+        case 'GET_COURSES_SUCCESS':
+            let {coursesData} = payload
+            console.log(payload)
+            return {
+                ...state, loading: false, courses:coursesData
+            }
+
+        case 'GET_COURSES_FAILURE':
+            return {
+                ...state, loading:false
             }
 
         default:

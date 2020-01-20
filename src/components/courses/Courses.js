@@ -2,9 +2,13 @@ import React from "react";
 import AddCourse from "./AddCourses";
 import CourseList from "./CourseList";
 import { connect } from "react-redux";
-import { addCourse } from "../../redux/actions";
+import { addCourse, getCourses } from "../../redux/actions";
 
 class Courses extends React.Component {
+
+  componentDidMount = () => {
+    this.props.getCourses()
+  }
   add = course => {
     if (course) {
       this.props.addCourse(course);
@@ -17,8 +21,6 @@ class Courses extends React.Component {
         <h2>Courses</h2>
         <hr />
         <CourseList items={this.props.courses} />
-        <br />
-        <AddCourse add={this.add} />
       </div>
     );
   }
@@ -32,7 +34,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addCourse: course => dispatch(addCourse(course))
+    addCourse: course => dispatch(addCourse(course)),
+    getCourses: () => dispatch(getCourses())
   };
 };
 

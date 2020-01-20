@@ -6,7 +6,7 @@ function CourseList(props) {
   return (
     <ul>
       {items && items.map((elem, index) => (
-        <CourseItem name={elem} key={index} />
+        <CourseItem title={elem.title} key={index} />
       ))}
     </ul>
   );

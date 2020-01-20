@@ -1,7 +1,8 @@
 import React from "react";
 
 export default function CourseItem(props) {
-  const { name } = props;
+  const { title } = props;
+  console.log(props)
 
-  return <li>{name}</li>;
+  return <li>{title}</li>;
 }
