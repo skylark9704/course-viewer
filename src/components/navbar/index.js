@@ -14,7 +14,7 @@ function Navbar(props) {
               to={elem.route}
             >
               {elem.label}
-            </NavLink>{" "}
+            </NavLink>
             {index !== items.length - 1 && "|"}
           </div>
         );

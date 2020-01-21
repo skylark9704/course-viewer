@@ -26,3 +26,7 @@ code {
 .nav-active{
   color: red;
 }
+
+td{
+  vertical-align: middle !important;
+}

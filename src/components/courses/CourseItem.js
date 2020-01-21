@@ -2,7 +2,6 @@ import React from "react";
 import {Link} from 'react-router-dom'
 export default function CourseItem(props) {
   const { title, category, authorName, slug } = props.course;
-  console.log(props)
   const route = `/course/${slug}`
   return (
     <tr>

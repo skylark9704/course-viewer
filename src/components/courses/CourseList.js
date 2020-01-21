@@ -3,8 +3,10 @@ import CourseItem from "./CourseItem";
 function CourseList(props) {
   const { items } = props;
   return (
-    <table className="table
-    ">
+    <table
+      className="table
+    "
+    >
       <thead>
         <tr>
           <th></th>
@@ -22,12 +24,7 @@ function CourseList(props) {
 
       <tbody>
         {items &&
-          items.map((elem, index) => (
-            <CourseItem
-              course = {elem}
-              key={index}
-            />
-          ))}
+          items.map((course, index) => <CourseItem course={course} key={index} />)}
       </tbody>
     </table>
   );

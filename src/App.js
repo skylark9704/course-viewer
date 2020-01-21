@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "./components/navbar/Navbar";
-import Courses from './components/courses/Courses'
+import Navbar from "./components/navbar";
+import Courses from './components/courses'
+import AddCourse from './components/addCourse'
 
 function App() {
 
@@ -21,6 +22,9 @@ function App() {
           </Route>
           <Route exact path="/about">
             <About />
+          </Route>
+          <Route path="/course">
+            <AddCourse />
           </Route>
           <Route path="/courses">
             <Courses />
