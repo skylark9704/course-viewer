@@ -1,76 +1,107 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AuthorList from "./AuthorList";
-import InputComponent from "../common/Input";
-import { addCourse } from "../../redux/courses/actions";
+import {
+  addCourse,
+  getCourses,
+  editCourse,
+  editCourseReset,
+  getCoursesReset
+} from "../../redux/courses/actions";
 import { Redirect } from "react-router-dom";
+import CourseForm from "./CourseForm";
+import Loading from "../common/Loading";
 
 class AddCourse extends Component {
-  getAuthorSelection = value => {
-    console.log(value);
+  constructor(props) {
+    super(props);
+    const { courses, getCourses } = this.props;
+    const { slug } = this.props.match.params;
+    this.slug = slug;
+    if (courses.length === 0 && this.slug !== undefined) {
+      console.log("Getting Courses");
+      getCourses();
+    }
+  }
+
+  componentWillUnmount = () => {
+    const { editCourseReset, getCoursesReset } = this.props;
+    editCourseReset();
+    getCoursesReset();
   };
 
-  onSubmit = e => {
-    e.preventDefault();
-    const { title, author, category } = e.target;
-    const course = {
-      title: title.value,
-      authorId: Number(author.value),
-      category: category.value
-    };
-    console.log("Course :", course);
-    this.props.addCourse(course);
+  onSubmit = course => {
+    console.log("Submitting")
+    const { addCourse, editCourse } = this.props;
+    if (course.id) {
+      editCourse(course);
+    } else {
+      console.log("Adding Course")
+      addCourse(course);
+    }
   };
 
   render() {
-    if (this.props.addCourseRequest) {
-      const { isFullfilled } = this.props.addCourseRequest;
-      if (isFullfilled) {
-        return <Redirect to="/courses" />;
+    const {
+      addCourseRequest,
+      getCourseRequest,
+      courses,
+      editCourseStatus
+    } = this.props;
+
+    if(addCourseRequest.isFullfilled || editCourseStatus.isFullfilled){
+      return <Redirect to='/courses' />
+    }
+    if (getCourseRequest.isPending) {
+      return <Loading />;
+    }
+
+    if (this.slug) {
+
+      let courseIndex = courses.findIndex(_course => {
+        return _course.slug === this.slug;
+      });
+
+      if (courseIndex !== -1) {
+        return (
+          <CourseForm
+            edit={true}
+            courseData={courses[courseIndex]}
+            onSubmit={this.onSubmit}
+          />
+        );
+      }
+
+      else{
+        return <Redirect to='/not-found' />
       }
     }
 
-    return (
-      <div>
-        <h2>Add Course {this.props.isPending ? "True" : "False"}</h2>
-        <hr />
-        <form onSubmit={this.onSubmit}>
-          <fieldset disabled={this.props.isPending}>
-            <InputComponent
-              label="Title"
-              type="text"
-              name="title"
-              placeholder="Enter Course Title"
-              required={true}
-            />
-            <AuthorList required={true} onSelect={this.getAuthorSelection} />
-            {/* onSelect Prop is Optional [Use-case: Captures onChange event of component as soon as its fired] */}
-            <InputComponent
-              label="Category"
-              type="text"
-              name="category"
-              placeholder="Enter Course Category"
-              required={true}
-            />
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </fieldset>
-        </form>
-      </div>
-    );
+    return <CourseForm disabled={addCourseRequest.isPending} onSubmit={this.onSubmit} />;
   }
 }
 
 const mapStateToProps = state => {
+  const {
+    addCourseRequest,
+    getCoursesRequestStatus,
+    coursesList,
+    editCourseStatus
+  } = state.courses;
   return {
-    addCourseRequest: state.courses.addCourseRequest
+    addCourseRequest,
+    getCourseRequest: getCoursesRequestStatus,
+    courses: coursesList,
+    editCourseStatus
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addCourse: course => dispatch(addCourse(course))
+    addCourse: course => dispatch(addCourse(course)),
+    editCourse: course => dispatch(editCourse(course)),
+    getCourses: () => dispatch(getCourses()),
+    editCourseReset: () => dispatch(editCourseReset()),
+    getCoursesReset: () => dispatch(getCoursesReset())
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AddCourse);

@@ -10,18 +10,25 @@ const getAuthorsSuccess = data => {
   return {
     type: GET_AUTHORS_SUCCESS,
     payload: {
-      loading: false,
-      authorsData: data
+      authorsData: data,
+      getAuthorsRequest: {
+        isPending: false,
+        isFullfilled: true,
+        isCancelled: false
+      }
     }
   };
 };
 
-const getAuthorsFailure = error => {
+const getAuthorsFailure = () => {
   return {
     type: GET_AUTHORS_FAILURE,
     payload: {
-      loading: false,
-      error
+      getAuthorsRequest: {
+        isPending: false,
+        isFullfilled: true,
+        isCancelled: true
+      }
     }
   };
 };
@@ -30,7 +37,11 @@ const getAuthorsRequest = () => {
   return {
     type: GET_AUTHORS_REQUEST,
     payload: {
-      loading: true
+      getAuthorsRequest: {
+        isPending: true,
+        isFullfilled: false,
+        isCancelled: false
+      }
     }
   };
 };
@@ -51,4 +62,4 @@ const getAuthors = () => {
   };
 };
 
-export { getAuthors, getAuthorsSuccess };
+export { getAuthors, getAuthorsSuccess, getAuthorsRequest };

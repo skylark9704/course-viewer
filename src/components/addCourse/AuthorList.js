@@ -14,7 +14,7 @@ class AuthorList extends React.Component {
   };
 
   render() {
-    const { authors, required } = this.props;
+    const { authors, required, value } = this.props;
     return (
       <div className="form-group">
         <label>Authors</label>
@@ -22,7 +22,7 @@ class AuthorList extends React.Component {
           required={required}
           name="author"
           className="form-control"
-          defaultValue={null}
+          defaultValue={value && value}
           onChange={this.onChange}
         >
           <option value={null}>Choose</option>
@@ -41,8 +41,9 @@ class AuthorList extends React.Component {
 }
 
 const mapStateToProps = state => {
+  const { authorList } = state.authors;
   return {
-    authors: state.authors.authorList
+    authors: authorList
   };
 };
 

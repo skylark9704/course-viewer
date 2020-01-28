@@ -1,7 +1,7 @@
 import React from "react";
 
 function InputComponent(props) {
-  const { name, type, label, placeholder, required } = props;
+  const { name, type, label, placeholder, required, value } = props;
 
   return (
     <div className="form-group">
@@ -11,7 +11,8 @@ function InputComponent(props) {
         type={type ? type : "text"}
         className="form-control"
         placeholder={placeholder && placeholder}
-        required = {required}
+        required={required}
+        defaultValue={value ? value : ""}
       />
     </div>
   );

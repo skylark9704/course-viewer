@@ -1,34 +1,45 @@
-let initialState = {
-    authorList: [],
-    loading: false
-  };
-
-const authorReducer = (state = initialState, action) => {
-  const { type, payload } = action;
-  switch (type) {
-    case "GET_AUTHORS_REQUEST":
-      return {
-        ...state,
-        loading: true
-      };
-
-    case "GET_AUTHORS_SUCCESS":
-      let { authorsData } = payload;
-      return {
-        ...state,
-        loading: false,
-        authorList: authorsData
-      };
-
-    case "GET_AUTHORS_FAILURE":
-      return {
-        ...state,
-        loading: false
-      };
-
-    default:
-      return state;
+const initialState = {
+  authorList: [],
+  getAuthorsRequest: {
+    isFullfilled: false,
+    isPending: false,
+    isCancelled: false
   }
 };
 
-export {authorReducer}
+const authorReducer = (state = initialState, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case "GET_AUTHORS_REQUEST": {
+      const { getAuthorsRequest } = payload;
+      return {
+        ...state,
+        getAuthorsRequest
+      };
+    }
+
+    case "GET_AUTHORS_SUCCESS": {
+      const { authorsData, getAuthorsRequest } = payload;
+      return {
+        ...state,
+        authorList: authorsData,
+        getAuthorsRequest
+      };
+    }
+
+    case "GET_AUTHORS_FAILURE": {
+      const { getAuthorsRequest } = payload;
+      return {
+        ...state,
+        getAuthorsRequest
+      };
+    }
+
+    default: {
+      return state;
+    }
+  }
+};
+
+export { authorReducer };

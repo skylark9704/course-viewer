@@ -1,7 +1,12 @@
 import React from "react";
 import CourseItem from "./CourseItem";
+import Loading from "../common/Loading";
 function CourseList(props) {
-  const { items } = props;
+  const { items, loading } = props;
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <table
       className="table
@@ -24,7 +29,9 @@ function CourseList(props) {
 
       <tbody>
         {items &&
-          items.map((course, index) => <CourseItem course={course} key={index} />)}
+          items.map((course, index) => (
+            <CourseItem course={course} key={index} />
+          ))}
       </tbody>
     </table>
   );

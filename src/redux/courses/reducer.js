@@ -1,55 +1,172 @@
-let initialState = {
+const initialState = {
   coursesList: [],
-  loading: false,
-  addCourseRequest:{}
+  addCourseRequest: {
+    isPending: false,
+    isFullfilled: false,
+    isCancelled: false
+  },
+  getCoursesRequestStatus: {
+    isPending: false,
+    isFullfilled: false,
+    isCancelled: false
+  },
+  editCourseStatus: {
+    isPending: false,
+    isFullfilled: false,
+    isCancelled: false
+  },
+  deleteCourseStatus: {
+    isPending: false,
+    isFullfilled: false,
+    isCancelled: false
+  }
 };
 
-const courseReducer = (state, action) => {
+const courseReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case "GET_COURSES_REQUEST":
+    case "GET_COURSES_RESET": {
+      const { getCoursesRequestStatus } = payload;
+
       return {
         ...state,
-        loading: true
+        getCoursesRequestStatus
       };
-
-    case "GET_COURSES_SUCCESS":
-      const { coursesData } = payload;
+    }
+    case "GET_COURSES_REQUEST": {
+      const { getCoursesRequestStatus } = payload;
       return {
         ...state,
-        loading: false,
-        coursesList: coursesData
+        getCoursesRequestStatus
       };
+    }
 
-    case "GET_COURSES_FAILURE":
+    case "GET_COURSES_SUCCESS": {
+      const { coursesData, getCoursesRequestStatus } = payload;
       return {
         ...state,
-        loading: false
+        coursesList: coursesData,
+        getCoursesRequestStatus
       };
+    }
 
-    case "ADD_COURSE_REQUEST":{
-      const {addCourseRequest} = payload
+    case "GET_COURSES_FAILURE": {
+      const { getCoursesRequestStatus } = payload;
+      return {
+        ...state,
+        getCoursesRequestStatus
+      };
+    }
+
+    case "ADD_COURSE_REQUEST": {
+      const { addCourseRequest } = payload;
       return {
         ...state,
         addCourseRequest
-      };}
+      };
+    }
 
-    case "ADD_COURSE_SUCCESS":{
-      const {addCourseRequest} = payload
+    case "ADD_COURSE_SUCCESS": {
+      const { addCourseRequest } = payload;
       return {
         ...state,
         addCourseRequest
-      };}
+      };
+    }
 
-    case "ADD_COUSE_FAILURE":{
-      const {addCourseRequest} = payload
+    case "ADD_COUSE_FAILURE": {
+      const { addCourseRequest } = payload;
       return {
         ...state,
         addCourseRequest
-      };}
+      };
+    }
+
+    case "EDIT_COURSE_RESET": {
+      const { editCourseStatus } = payload;
+      return {
+        ...state,
+        editCourseStatus
+      };
+    }
+
+    case "EDIT_COURSE_REQUEST": {
+      const {
+        course,
+        course: { id },
+        editCourseStatus
+      } = payload;
+      let courses = state.coursesList.slice();
+      let courseToBeEdited = courses.findIndex(_course => {
+        return _course.id === id;
+      });
+      let editedCourse = { ...course };
+      courses[courseToBeEdited] = editedCourse;
+
+      return {
+        ...state,
+        coursesList: courses,
+        editCourseStatus
+      };
+    }
+
+    case "EDIT_COURSE_SUCCESS": {
+      const { editCourseStatus } = payload;
+
+      return {
+        ...state,
+        editCourseStatus
+      };
+    }
+
+    case "EDIT_COURSE_FAILURE": {
+      const { editCourseStatus } = payload;
+
+      return {
+        ...state,
+        editCourseStatus
+      };
+    }
+
+    case "DELETE_COURSE_RESET": {
+      const { deleteCourseStatus } = payload;
+
+      return {
+        ...state,
+        deleteCourseStatus
+      };
+    }
+    case "DELETE_COURSE_REQUEST": {
+      const { id, deleteCourseStatus } = payload;
+      let courses = state.coursesList.slice()
+      courses.splice(id,1)
       
-    default:
-      return initialState;
+      return {
+        ...state,
+        coursesList:courses,
+        deleteCourseStatus
+      };
+    }
+    case "DELETE_COURSE_SUCCESS": {
+      const { deleteCourseStatus } = payload;
+
+      return {
+        ...state,
+        deleteCourseStatus
+      };
+    }
+    case "DELETE_COURSE_FAILURE": {
+      const { deleteCourseStatus } = payload;
+
+      return {
+        ...state,
+        deleteCourseStatus
+      };
+    }
+
+    default: {
+      return state;
+    }
   }
 };
 

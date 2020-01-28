@@ -2,41 +2,50 @@ import React from "react";
 import AddCourse from "./AddCourses";
 import CourseList from "./CourseList";
 import { connect } from "react-redux";
-import { getCourses } from "../../redux/courses/actions";
+import { getCourses, getCoursesReset } from "../../redux/courses/actions";
 
 class Courses extends React.Component {
-
   componentDidMount = () => {
-    this.props.getCourses()
-  }
-  add = course => {
-    if (course) {
-      this.props.addCourse(course);
+    const { getCourses, courses } = this.props;
+    if (courses.length === 0) {
+      getCourses();
     }
   };
 
+  componentWillUnmount = () => {
+    const {getCoursesReset} = this.props
+    getCoursesReset()
+  }
+
   render() {
+    const {
+      getCourseRequest: { isPending },
+      courses
+    } = this.props;
     return (
       <div>
         <h2>Courses</h2>
         <hr />
-        <AddCourse/>
+        <AddCourse />
         <br />
-        <CourseList items={this.props.courses} />
+        <CourseList loading={isPending} items={courses} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
+  const { coursesList, getCoursesRequestStatus } = state.courses;
   return {
-    courses: state.courses.coursesList
+    courses: coursesList,
+    getCourseRequest: getCoursesRequestStatus
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getCourses: () => dispatch(getCourses()),
+    getCoursesReset: () => dispatch(getCoursesReset())
   };
 };
 

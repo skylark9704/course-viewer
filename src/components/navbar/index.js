@@ -5,15 +5,15 @@ function Navbar(props) {
   const { items } = props;
   return (
     <div className="nav">
-      {items.map((elem, index) => {
+      {items.map((item, index) => {
         return (
           <div key={index}>
             <NavLink
-              exact={elem.exact}
+              exact={item.exact}
               activeClassName="nav-active"
-              to={elem.route}
+              to={item.route}
             >
-              {elem.label}
+              {item.label}
             </NavLink>
             {index !== items.length - 1 && "|"}
           </div>
@@ -23,4 +23,4 @@ function Navbar(props) {
   );
 }
 
-export default Navbar
+export default Navbar;
