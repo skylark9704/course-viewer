@@ -1,6 +1,7 @@
 import React from "react";
 import CourseItem from "./CourseItem";
 import Loading from "../common/Loading";
+
 function CourseList(props) {
   const { items, loading } = props;
 
@@ -24,6 +25,7 @@ function CourseList(props) {
           <th>
             <b>Category</b>
           </th>
+          <th></th>
         </tr>
       </thead>
 

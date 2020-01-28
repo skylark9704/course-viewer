@@ -137,21 +137,26 @@ const courseReducer = (state = initialState, action) => {
       };
     }
     case "DELETE_COURSE_REQUEST": {
-      const { id, deleteCourseStatus } = payload;
-      let courses = state.coursesList.slice()
-      courses.splice(id,1)
-      
+      const { deleteCourseStatus } = payload;
+     
       return {
         ...state,
-        coursesList:courses,
         deleteCourseStatus
       };
     }
     case "DELETE_COURSE_SUCCESS": {
-      const { deleteCourseStatus } = payload;
-
+      const { id, deleteCourseStatus } = payload;
+      let courses = state.coursesList.slice();
+      let index = courses.findIndex(course => {
+        return course.id === id;
+      });
+      if (index !== -1) {
+        courses.splice(index, 1);
+      }
+      
       return {
         ...state,
+        coursesList: courses,
         deleteCourseStatus
       };
     }

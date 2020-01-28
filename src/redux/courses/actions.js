@@ -242,11 +242,10 @@ const deleteCourseReset = () => {
   };
 };
 
-const deleteCourseRequest = id => {
+const deleteCourseRequest = () => {
   return {
     type: DELETE_COURSE_REQUEST,
     payload: {
-      id,
       deleteCourseStatus: {
         isPending: true,
         isFullfilled: false,
@@ -256,10 +255,11 @@ const deleteCourseRequest = id => {
   };
 };
 
-const deleteCourseSuccess = () => {
+const deleteCourseSuccess = id => {
   return {
     type: DELETE_COURSE_SUCCESS,
     payload: {
+      id,
       deleteCourseStatus: {
         isPending: false,
         isFullfilled: true,
@@ -281,10 +281,13 @@ const deleteCourseFailure = () => {
     }
   };
 };
-const deleteCourse = slug => {
+const deleteCourse = id => {
   return function(dispatch) {
-    dispatch(deleteCourseRequest(slug));
-    dispatch(deleteCourseSuccess());
+    dispatch(deleteCourseRequest());
+    setTimeout(()=> {
+      dispatch(deleteCourseSuccess(id));
+    },3000)
+    
   };
 };
 
