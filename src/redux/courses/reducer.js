@@ -1,11 +1,11 @@
 const initialState = {
   coursesList: [],
-  addCourseRequest: {
+  getCoursesStatus: {
     isPending: false,
     isFullfilled: false,
     isCancelled: false
   },
-  getCoursesRequestStatus: {
+  addCourseStatus: {
     isPending: false,
     isFullfilled: false,
     isCancelled: false
@@ -26,59 +26,69 @@ const courseReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case "GET_COURSES_RESET": {
-      const { getCoursesRequestStatus } = payload;
+      const { getCoursesStatus } = payload;
 
       return {
         ...state,
-        getCoursesRequestStatus
+        getCoursesStatus
       };
     }
     case "GET_COURSES_REQUEST": {
-      const { getCoursesRequestStatus } = payload;
+      const { getCoursesStatus } = payload;
+
       return {
         ...state,
-        getCoursesRequestStatus
+        getCoursesStatus
       };
     }
 
     case "GET_COURSES_SUCCESS": {
-      const { coursesData, getCoursesRequestStatus } = payload;
+      const { coursesData, getCoursesStatus } = payload;
       return {
         ...state,
         coursesList: coursesData,
-        getCoursesRequestStatus
+        getCoursesStatus
       };
     }
 
     case "GET_COURSES_FAILURE": {
-      const { getCoursesRequestStatus } = payload;
+      const { getCoursesStatus } = payload;
       return {
         ...state,
-        getCoursesRequestStatus
+        getCoursesStatus
+      };
+    }
+
+    case "ADD_COURSE_RESET": {
+      const { addCourseStatus } = payload;
+
+      return {
+        ...state,
+        addCourseStatus
       };
     }
 
     case "ADD_COURSE_REQUEST": {
-      const { addCourseRequest } = payload;
+      const { addCourseStatus } = payload;
       return {
         ...state,
-        addCourseRequest
+        addCourseStatus
       };
     }
 
     case "ADD_COURSE_SUCCESS": {
-      const { addCourseRequest } = payload;
+      const { addCourseStatus } = payload;
       return {
         ...state,
-        addCourseRequest
+        addCourseStatus
       };
     }
 
     case "ADD_COUSE_FAILURE": {
-      const { addCourseRequest } = payload;
+      const { addCourseStatus } = payload;
       return {
         ...state,
-        addCourseRequest
+        addCourseStatus
       };
     }
 
@@ -91,21 +101,9 @@ const courseReducer = (state = initialState, action) => {
     }
 
     case "EDIT_COURSE_REQUEST": {
-      const {
-        course,
-        course: { id },
-        editCourseStatus
-      } = payload;
-      let courses = state.coursesList.slice();
-      let courseToBeEdited = courses.findIndex(_course => {
-        return _course.id === id;
-      });
-      let editedCourse = { ...course };
-      courses[courseToBeEdited] = editedCourse;
-
+      const { editCourseStatus } = payload;
       return {
         ...state,
-        coursesList: courses,
         editCourseStatus
       };
     }
@@ -138,28 +136,21 @@ const courseReducer = (state = initialState, action) => {
     }
     case "DELETE_COURSE_REQUEST": {
       const { deleteCourseStatus } = payload;
-     
+
       return {
         ...state,
         deleteCourseStatus
       };
     }
     case "DELETE_COURSE_SUCCESS": {
-      const { id, deleteCourseStatus } = payload;
-      let courses = state.coursesList.slice();
-      let index = courses.findIndex(course => {
-        return course.id === id;
-      });
-      if (index !== -1) {
-        courses.splice(index, 1);
-      }
-      
+      const { deleteCourseStatus } = payload;
+
       return {
         ...state,
-        coursesList: courses,
         deleteCourseStatus
       };
     }
+
     case "DELETE_COURSE_FAILURE": {
       const { deleteCourseStatus } = payload;
 

@@ -19,7 +19,7 @@ class Courses extends React.Component {
 
   render() {
     const {
-      getCourseRequest: { isPending },
+      getCoursesStatus: { isPending },
       courses
     } = this.props;
     return (
@@ -34,15 +34,15 @@ class Courses extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { coursesList, getCoursesRequestStatus } = state.courses;
+const mapStateToProps = (state) => {
+  const { coursesList, getCoursesStatus } = state.courses;
   return {
     courses: coursesList,
-    getCourseRequest: getCoursesRequestStatus
+    getCoursesStatus
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getCourses: () => dispatch(getCourses()),
     getCoursesReset: () => dispatch(getCoursesReset())

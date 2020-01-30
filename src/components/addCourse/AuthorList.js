@@ -40,14 +40,14 @@ class AuthorList extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { authorList } = state.authors;
   return {
     authors: authorList
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getAuthors: () => dispatch(getAuthors())
   };

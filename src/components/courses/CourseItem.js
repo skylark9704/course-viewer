@@ -5,11 +5,11 @@ import { deleteCourse } from "../../redux/courses/actions";
 function CourseItem(props) {
   const {
     course: { id, title, category, authorName, slug },
-    deleteCourseStatus
+    deleteCourseStatus, deleteCourse
   } = props;
 
-  const deleteCourse = id => {
-    props.deleteCourse(id);
+  const courseDelete = id => {
+    deleteCourse(id);
   };
 
   const route = `/course/${slug}`;
@@ -27,7 +27,7 @@ function CourseItem(props) {
         <button
           disabled={deleteCourseStatus.isPending}
           className="btn btn-outline-danger"
-          onClick={() => deleteCourse(id)}
+          onClick={() => courseDelete(id)}
         >
           Delete
         </button>
@@ -36,13 +36,14 @@ function CourseItem(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
+  const {deleteCourseStatus} = state.courses
   return {
-    deleteCourseStatus: state.courses.deleteCourseStatus
+    deleteCourseStatus
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     deleteCourse: id => dispatch(deleteCourse(id))
   };

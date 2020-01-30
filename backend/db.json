@@ -1,59 +1,18 @@
 {
   "courses": [
     {
-      "id": 1,
-      "title": "Securing React Apps with Auth0",
-      "slug": "react-auth0-authentication-security",
-      "authorId": 1,
-      "category": "JavaScript"
-    },
-    {
-      "id": 2,
-      "title": "React: The Big Picture",
-      "slug": "react-big-picture",
-      "authorId": 1,
-      "category": "JavaScript"
-    },
-    {
-      "id": 3,
-      "title": "Creating Reusable React Components",
-      "slug": "react-creating-reusable-components",
-      "authorId": 1,
-      "category": "JavaScript"
-    },
-    {
-      "id": 4,
-      "title": "Building a JavaScript Development Environment",
-      "slug": "javascript-development-environment",
-      "authorId": 1,
-      "category": "JavaScript"
-    },
-    {
-      "id": 5,
-      "title": "Building Applications with React and Redux",
-      "slug": "react-redux-react-router-es6",
-      "authorId": 1,
-      "category": "JavaScript"
-    },
-    {
-      "id": 6,
-      "title": "Building Applications in React and Flux",
-      "slug": "react-flux-building-applications",
-      "authorId": 1,
-      "category": "JavaScript"
-    },
-    {
       "id": 7,
       "title": "Clean Code: Writing Code for Humans",
       "slug": "writing-clean-code-humans",
       "authorId": 1,
-      "category": "Software Practices"
+      "category": "Software Practices",
+      "authorName": "Cory House"
     },
     {
       "id": 8,
       "title": "Architecting Applications for the Real World",
       "slug": "architecting-applications-dotnet",
-      "authorId": 1,
+      "authorId": 2,
       "category": "Software Architecture"
     },
     {
@@ -79,68 +38,29 @@
       "id": 11
     },
     {
-      "title": "Redux Thunk",
+      "title": "Redux Thunk - What does it actually do",
       "authorId": 2,
       "category": "JavaScript",
       "createdAt": 1579673619110,
       "slug": "redux-thunk",
-      "id": 12
+      "id": 12,
+      "authorName": "Scott Allen"
     },
     {
-      "title": "gdfgbdfb",
-      "authorId": 2,
-      "category": "Hello 2",
-      "createdAt": 1579673810287,
-      "slug": "gdfgbdfb",
+      "title": "Python - Generators are fun!",
+      "authorId": 1,
+      "category": "Python",
+      "createdAt": 1580371665006,
+      "slug": "python-generators-are-fun",
       "id": 13
     },
     {
-      "title": "Python Generators",
-      "authorId": 2,
-      "category": "Python",
-      "createdAt": 1579675764522,
-      "slug": "python-generators",
+      "title": "The Angular Way of Accessing DOM",
+      "authorId": 3,
+      "category": "TypeScript",
+      "createdAt": 1580374094737,
+      "slug": "the-angular-way-of-accessing-dom",
       "id": 14
-    },
-    {
-      "title": "asd",
-      "authorId": 1,
-      "category": "Hello 2",
-      "createdAt": 1579693646275,
-      "slug": "asd",
-      "id": 15
-    },
-    {
-      "title": "The Angular Way of Accessing DOM",
-      "authorId": 3,
-      "category": "TypeScript",
-      "createdAt": 1580124448904,
-      "slug": "the-angular-way-of-accessing-dom",
-      "id": 16
-    },
-    {
-      "title": "gfnghn mjnh",
-      "authorId": 3,
-      "category": "hmghhgmn",
-      "createdAt": 1580124713576,
-      "slug": "gfnghn-mjnh",
-      "id": 17
-    },
-    {
-      "title": "The Angular Way of Accessing DOM",
-      "authorId": 3,
-      "category": "TypeScript",
-      "createdAt": 1580124780002,
-      "slug": "the-angular-way-of-accessing-dom",
-      "id": 18
-    },
-    {
-      "title": "Angular router animations using router-outlet",
-      "authorId": 2,
-      "category": "TypeScript",
-      "createdAt": 1580125224041,
-      "slug": "angular-router-animations-using-router-outlet",
-      "id": 19
     }
   ],
   "authors": [

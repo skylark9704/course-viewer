@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+
 import {
   addCourse,
   getCourses,
   editCourse,
   editCourseReset,
-  getCoursesReset
+  getCoursesReset,
+  addCourseReset
 } from "../../redux/courses/actions";
-import { Redirect } from "react-router-dom";
 import CourseForm from "./CourseForm";
 import Loading from "../common/Loading";
 
@@ -18,47 +20,44 @@ class AddCourse extends Component {
     const { slug } = this.props.match.params;
     this.slug = slug;
     if (courses.length === 0 && this.slug !== undefined) {
-      console.log("Getting Courses");
       getCourses();
     }
   }
 
   componentWillUnmount = () => {
-    const { editCourseReset, getCoursesReset } = this.props;
+    const { editCourseReset, getCoursesReset, addCourseReset } = this.props;
     editCourseReset();
     getCoursesReset();
+    addCourseReset();
   };
 
   onSubmit = course => {
-    console.log("Submitting")
     const { addCourse, editCourse } = this.props;
     if (course.id) {
       editCourse(course);
     } else {
-      console.log("Adding Course")
       addCourse(course);
     }
   };
 
   render() {
     const {
-      addCourseRequest,
-      getCourseRequest,
+      addCourseStatus,
+      getCoursesStatus,
       courses,
       editCourseStatus
     } = this.props;
 
-    if(addCourseRequest.isFullfilled || editCourseStatus.isFullfilled){
-      return <Redirect to='/courses' />
+    if (addCourseStatus.isFullfilled || editCourseStatus.isFullfilled) {
+      return <Redirect to="/courses" />;
     }
-    if (getCourseRequest.isPending) {
+    if (getCoursesStatus.isPending) {
       return <Loading />;
     }
 
     if (this.slug) {
-
-      let courseIndex = courses.findIndex(_course => {
-        return _course.slug === this.slug;
+      let courseIndex = courses.findIndex(course => {
+        return course.slug === this.slug;
       });
 
       if (courseIndex !== -1) {
@@ -69,27 +68,30 @@ class AddCourse extends Component {
             onSubmit={this.onSubmit}
           />
         );
-      }
-
-      else{
-        return <Redirect to='/not-found' />
+      } else {
+        return <Redirect to="/not-found" />;
       }
     }
 
-    return <CourseForm disabled={addCourseRequest.isPending} onSubmit={this.onSubmit} />;
+    return (
+      <CourseForm
+        disabled={addCourseStatus.isPending || editCourseStatus.isPending}
+        onSubmit={this.onSubmit}
+      />
+    );
   }
 }
 
 const mapStateToProps = state => {
   const {
-    addCourseRequest,
-    getCoursesRequestStatus,
+    addCourseStatus,
+    getCoursesStatus,
     coursesList,
     editCourseStatus
   } = state.courses;
   return {
-    addCourseRequest,
-    getCourseRequest: getCoursesRequestStatus,
+    addCourseStatus,
+    getCoursesStatus,
     courses: coursesList,
     editCourseStatus
   };
@@ -101,7 +103,8 @@ const mapDispatchToProps = dispatch => {
     editCourse: course => dispatch(editCourse(course)),
     getCourses: () => dispatch(getCourses()),
     editCourseReset: () => dispatch(editCourseReset()),
-    getCoursesReset: () => dispatch(getCoursesReset())
+    getCoursesReset: () => dispatch(getCoursesReset()),
+    addCourseReset: () => dispatch(addCourseReset())
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AddCourse);

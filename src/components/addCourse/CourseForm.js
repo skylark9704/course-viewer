@@ -3,7 +3,7 @@ import InputComponent from "../common/Input";
 import AuthorList from "./AuthorList";
 
 function CourseForm(props) {
-  const { edit = false, courseData, onSubmit } = props;
+  const { edit = false, courseData, onSubmit, disabled } = props;
   const onFormSubmit = e => {
     e.preventDefault();
 
@@ -27,7 +27,7 @@ function CourseForm(props) {
       }
 
       default: {
-        return null;
+        break;
       }
     }
   };
@@ -37,7 +37,7 @@ function CourseForm(props) {
       <h3>{edit ? 'Edit Course' : 'Add Course'}</h3>
       <hr />
       <form onSubmit={e => onFormSubmit(e)}>
-        <fieldset disabled={props.disabled}>
+        <fieldset disabled={disabled}>
           <InputComponent
             label="Title"
             type="text"

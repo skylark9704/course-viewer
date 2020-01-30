@@ -5,6 +5,7 @@ import {
   GET_COURSES_REQUEST,
   GET_COURSES_SUCCESS,
   GET_COURSES_FAILURE,
+  ADD_COURSE_RESET,
   ADD_COURSE_REQUEST,
   ADD_COURSE_SUCCESS,
   ADD_COURSE_FAILURE,
@@ -26,7 +27,7 @@ const getCoursesReset = () => {
   return {
     type: GET_COURSES_RESET,
     payload: {
-      getCoursesRequestStatus: {
+      getCoursesStatus: {
         isPending: false,
         isFullfilled: false,
         isCancelled: false
@@ -38,7 +39,7 @@ const getCoursesRequest = () => {
   return {
     type: GET_COURSES_REQUEST,
     payload: {
-      getCoursesRequestStatus: {
+      getCoursesStatus: {
         isPending: true,
         isFullfilled: false,
         isCancelled: false
@@ -47,16 +48,16 @@ const getCoursesRequest = () => {
   };
 };
 
-const getCoursesSuccess = data => {
+const getCoursesSuccess = (courses) => {
   return {
     type: GET_COURSES_SUCCESS,
     payload: {
-      getCoursesRequestStatus: {
+      getCoursesStatus: {
         isPending: false,
         isFullfilled: true,
         isCancelled: false
       },
-      coursesData: data
+      coursesData: courses
     }
   };
 };
@@ -65,7 +66,7 @@ const getCoursesFailure = () => {
   return {
     type: GET_COURSES_FAILURE,
     payload: {
-      getCoursesRequestStatus: {
+      getCoursesStatus: {
         isPending: false,
         isFullfilled: true,
         isCancelled: true
@@ -87,7 +88,7 @@ const getCourses = () => {
           .then(response => {
             const authors = response.data;
             dispatch(getAuthorsSuccess(authors));
-            courseData.map(course => {
+            courseData.forEach(course => {
               const authorName = authors.filter(author => {
                 if (author.id === course.authorId) return author.name;
                 return null;
@@ -108,11 +109,24 @@ const getCourses = () => {
   };
 };
 
+const addCourseReset = () => {
+  return {
+    type:ADD_COURSE_RESET,
+    payload: {
+      addCourseStatus: {
+        isPending: false,
+        isFullfilled: false,
+        isCancelled: false
+      }
+    }
+  }
+}
+
 const addCourseRequest = () => {
   return {
     type: ADD_COURSE_REQUEST,
     payload: {
-      addCourseRequest: {
+      addCourseStatus: {
         isPending: true,
         isFullfilled: false,
         isCancelled: false
@@ -125,7 +139,7 @@ const addCourseSuccess = () => {
   return {
     type: ADD_COURSE_SUCCESS,
     payload: {
-      addCourseRequest: {
+      addCourseStatus: {
         isPending: false,
         isFullfilled: true,
         isCancelled: false
@@ -138,7 +152,7 @@ const addCourseFailure = () => {
   return {
     type: ADD_COURSE_FAILURE,
     payload: {
-      addCourseRequest: {
+      addCourseStatus: {
         isPending: false,
         isFullfilled: true,
         isCancelled: true
@@ -147,8 +161,8 @@ const addCourseFailure = () => {
   };
 };
 
-const addCourse = course => {
-  console.log(course);
+const addCourse = (course) => {
+
   return function(dispatch) {
     dispatch(addCourseRequest());
     console.log("Adding Course");
@@ -158,6 +172,7 @@ const addCourse = course => {
         console.log("Add Course Response", response.data);
         if (response.data) {
           dispatch(addCourseSuccess());
+          dispatch(getCourses())
         } else {
           dispatch(addCourseFailure());
         }
@@ -182,11 +197,10 @@ const editCourseReset = () => {
   };
 };
 
-const editCourseRequest = course => {
+const editCourseRequest = () => {
   return {
     type: EDIT_COURSE_REQUEST,
     payload: {
-      course,
       editCourseStatus: {
         isPending: true,
         isFullfilled: false,
@@ -222,10 +236,19 @@ const editCourseFailure = () => {
   };
 };
 
-const editCourse = course => {
+const editCourse = (course) => {
   return function(dispatch) {
-    dispatch(editCourseRequest(course));
-    dispatch(editCourseSuccess());
+    dispatch(editCourseRequest());
+
+    axios.put(`http://localhost:3001/courses/${course.id}`,{...course})
+    .then(response => {
+      dispatch(editCourseSuccess(response.data));
+      dispatch(getCourses())
+    })
+    .catch(error => {
+      dispatch(editCourseFailure())
+    })
+    
   };
 };
 
@@ -255,11 +278,10 @@ const deleteCourseRequest = () => {
   };
 };
 
-const deleteCourseSuccess = id => {
+const deleteCourseSuccess = () => {
   return {
     type: DELETE_COURSE_SUCCESS,
     payload: {
-      id,
       deleteCourseStatus: {
         isPending: false,
         isFullfilled: true,
@@ -281,22 +303,27 @@ const deleteCourseFailure = () => {
     }
   };
 };
-const deleteCourse = id => {
+const deleteCourse = (id) => {
   return function(dispatch) {
     dispatch(deleteCourseRequest());
-    setTimeout(()=> {
-      dispatch(deleteCourseSuccess(id));
-    },3000)
+    axios.delete(`http://localhost:3001/courses/${id}`).then((response) => {
+      dispatch(deleteCourseSuccess())
+      dispatch(getCourses())
+    })
+    .catch((error) => {
+      dispatch(deleteCourseFailure())
+    })
     
   };
 };
 
 export {
   getCourses,
+  getCoursesReset,
   addCourse,
+  addCourseReset,
   editCourse,
   editCourseReset,
-  getCoursesReset,
   deleteCourse,
   deleteCourseReset
 };
