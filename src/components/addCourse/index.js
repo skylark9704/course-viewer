@@ -2,14 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import {
-  addCourse,
-  getCourses,
-  editCourse,
-  editCourseReset,
-  getCoursesReset,
-  addCourseReset
-} from "../../redux/courses/actions";
+import { ADD, GET, EDIT } from "../../sagas/courses/actions";
 import CourseForm from "./CourseForm";
 import Loading from "../common/Loading";
 
@@ -20,16 +13,10 @@ class AddCourse extends Component {
     const { slug } = this.props.match.params;
     this.slug = slug;
     if (courses.length === 0 && this.slug !== undefined) {
+      console.log("Slug Found");
       getCourses();
     }
   }
-
-  componentWillUnmount = () => {
-    const { editCourseReset, getCoursesReset, addCourseReset } = this.props;
-    editCourseReset();
-    getCoursesReset();
-    addCourseReset();
-  };
 
   onSubmit = course => {
     const { addCourse, editCourse } = this.props;
@@ -55,8 +42,9 @@ class AddCourse extends Component {
       return <Loading />;
     }
 
-    if (this.slug) {
+    if (this.slug && courses.length !== 0) {
       let courseIndex = courses.findIndex(course => {
+        console.log(course);
         return course.slug === this.slug;
       });
 
@@ -92,19 +80,16 @@ const mapStateToProps = state => {
   return {
     addCourseStatus,
     getCoursesStatus,
-    courses: coursesList,
-    editCourseStatus
+    editCourseStatus,
+    courses: coursesList
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addCourse: course => dispatch(addCourse(course)),
-    editCourse: course => dispatch(editCourse(course)),
-    getCourses: () => dispatch(getCourses()),
-    editCourseReset: () => dispatch(editCourseReset()),
-    getCoursesReset: () => dispatch(getCoursesReset()),
-    addCourseReset: () => dispatch(addCourseReset())
+    addCourse: course => dispatch(ADD.REQUEST(course)),
+    editCourse: course => dispatch(EDIT.REQUEST(course)),
+    getCourses: () => dispatch(GET.REQUEST())
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AddCourse);

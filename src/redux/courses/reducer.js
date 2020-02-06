@@ -34,6 +34,10 @@ const courseReducer = (state = initialState, action) => {
       };
     }
     case "GET_COURSES_REQUEST": {
+      return { ...state };
+    }
+
+    case "GET_COURSES_PENDING": {
       const { getCoursesStatus } = payload;
 
       return {
@@ -68,7 +72,11 @@ const courseReducer = (state = initialState, action) => {
       };
     }
 
-    case "ADD_COURSE_REQUEST": {
+    case "ADD_COURSE_REQUEST`": {
+      return { ...state };
+    }
+
+    case "ADD_COURSE_PENDING": {
       const { addCourseStatus } = payload;
       return {
         ...state,
@@ -101,6 +109,10 @@ const courseReducer = (state = initialState, action) => {
     }
 
     case "EDIT_COURSE_REQUEST": {
+      return { ...state };
+    }
+
+    case "EDIT_COURSE_PENDING": {
       const { editCourseStatus } = payload;
       return {
         ...state,
@@ -134,7 +146,12 @@ const courseReducer = (state = initialState, action) => {
         deleteCourseStatus
       };
     }
+
     case "DELETE_COURSE_REQUEST": {
+      return { ...state };
+    }
+
+    case "DELETE_COURSE_PENDING": {
       const { deleteCourseStatus } = payload;
 
       return {

@@ -2,7 +2,7 @@ import React from "react";
 import AddCourse from "./AddCourses";
 import CourseList from "./CourseList";
 import { connect } from "react-redux";
-import { getCourses, getCoursesReset } from "../../redux/courses/actions";
+import { GET } from "../../sagas/courses/actions";
 
 class Courses extends React.Component {
   componentDidMount = () => {
@@ -11,11 +11,6 @@ class Courses extends React.Component {
       getCourses();
     }
   };
-
-  componentWillUnmount = () => {
-    const {getCoursesReset} = this.props
-    getCoursesReset()
-  }
 
   render() {
     const {
@@ -44,8 +39,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCourses: () => dispatch(getCourses()),
-    getCoursesReset: () => dispatch(getCoursesReset())
+    getCourses: () => dispatch(GET.REQUEST()),
   };
 };
 

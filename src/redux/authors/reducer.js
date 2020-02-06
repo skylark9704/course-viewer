@@ -1,6 +1,6 @@
 const initialState = {
   authorList: [],
-  getAuthorsRequest: {
+  getAuthorsStatus: {
     isFullfilled: false,
     isPending: false,
     isCancelled: false
@@ -12,27 +12,31 @@ const authorReducer = (state = initialState, action) => {
 
   switch (type) {
     case "GET_AUTHORS_REQUEST": {
-      const { getAuthorsRequest } = payload;
+      return { ...state };
+    }
+
+    case "GET_AUTHORS_PENDING": {
+      const { getAuthorsStatus } = payload;
       return {
         ...state,
-        getAuthorsRequest
+        getAuthorsStatus
       };
     }
 
     case "GET_AUTHORS_SUCCESS": {
-      const { authorsData, getAuthorsRequest } = payload;
+      const { authorsData, getAuthorsStatus } = payload;
       return {
         ...state,
         authorList: authorsData,
-        getAuthorsRequest
+        getAuthorsStatus
       };
     }
 
     case "GET_AUTHORS_FAILURE": {
-      const { getAuthorsRequest } = payload;
+      const { getAuthorsStatus } = payload;
       return {
         ...state,
-        getAuthorsRequest
+        getAuthorsStatus
       };
     }
 

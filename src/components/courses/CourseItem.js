@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { deleteCourse } from "../../redux/courses/actions";
+import { DELETE } from "../../sagas/courses/actions";
 function CourseItem(props) {
   const {
     course: { id, title, category, authorName, slug },
-    deleteCourseStatus, deleteCourse
+    deleteCourseStatus,
+    deleteCourse
   } = props;
 
   const courseDelete = id => {
@@ -36,16 +37,16 @@ function CourseItem(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  const {deleteCourseStatus} = state.courses
+const mapStateToProps = state => {
+  const { deleteCourseStatus } = state.courses;
   return {
     deleteCourseStatus
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    deleteCourse: id => dispatch(deleteCourse(id))
+    deleteCourse: id => dispatch(DELETE.REQUEST(id))
   };
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getAuthors } from "../../redux/authors/actions";
+import { GET } from "../../sagas/authors/actions";
 
 class AuthorList extends React.Component {
   componentDidMount = () => {
@@ -40,16 +40,16 @@ class AuthorList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { authorList } = state.authors;
   return {
     authors: authorList
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    getAuthors: () => dispatch(getAuthors())
+    getAuthors: () => dispatch(GET.REQUEST())
   };
 };
 

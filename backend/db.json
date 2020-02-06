@@ -1,66 +1,69 @@
 {
   "courses": [
     {
+      "id": 1,
+      "title": "Securing React Apps with Auth",
+      "slug": "react-auth0-authentication-security",
+      "authorId": 1,
+      "category": "JavaScript",
+      "authorName": "Cory House"
+    },
+    {
+      "id": 2,
+      "title": "React: The Big Picture",
+      "slug": "react-big-picture",
+      "authorId": 1,
+      "category": "JavaScript"
+    },
+    {
+      "id": 3,
+      "title": "Creating Reusable React Components",
+      "slug": "react-creating-reusable-components",
+      "authorId": 1,
+      "category": "JavaScript"
+    },
+    {
+      "id": 4,
+      "title": "Building a JavaScript Development Environment",
+      "slug": "javascript-development-environment",
+      "authorId": 1,
+      "category": "JavaScript"
+    },
+    {
+      "id": 5,
+      "title": "Building Applications with React and Redux",
+      "slug": "react-redux-react-router-es6",
+      "authorId": 1,
+      "category": "JavaScript"
+    },
+    {
+      "id": 6,
+      "title": "Building Applications in React and Flux",
+      "slug": "react-flux-building-applications",
+      "authorId": 1,
+      "category": "JavaScript"
+    },
+    {
       "id": 7,
       "title": "Clean Code: Writing Code for Humans",
       "slug": "writing-clean-code-humans",
       "authorId": 1,
-      "category": "Software Practices",
-      "authorName": "Cory House"
+      "category": "Software Practices"
     },
     {
       "id": 8,
       "title": "Architecting Applications for the Real World",
       "slug": "architecting-applications-dotnet",
-      "authorId": 2,
+      "authorId": 1,
       "category": "Software Architecture"
-    },
-    {
-      "id": 9,
-      "title": "Becoming an Outlier: Reprogramming the Developer Mind",
-      "slug": "career-reboot-for-developer-mind",
-      "authorId": 1,
-      "category": "Career"
-    },
-    {
-      "id": 10,
-      "title": "Web Component Fundamentals",
-      "slug": "web-components-shadow-dom",
-      "authorId": 1,
-      "category": "HTML5"
-    },
-    {
-      "title": "Redux - Saga with React",
-      "authorId": 2,
-      "category": "Javascript",
-      "createdAt": 1579599318231,
-      "slug": "redux-saga-with-react",
-      "id": 11
-    },
-    {
-      "title": "Redux Thunk - What does it actually do",
-      "authorId": 2,
-      "category": "JavaScript",
-      "createdAt": 1579673619110,
-      "slug": "redux-thunk",
-      "id": 12,
-      "authorName": "Scott Allen"
-    },
-    {
-      "title": "Python - Generators are fun!",
-      "authorId": 1,
-      "category": "Python",
-      "createdAt": 1580371665006,
-      "slug": "python-generators-are-fun",
-      "id": 13
     },
     {
       "title": "The Angular Way of Accessing DOM",
       "authorId": 3,
       "category": "TypeScript",
-      "createdAt": 1580374094737,
+      "createdAt": 1580905544364,
       "slug": "the-angular-way-of-accessing-dom",
-      "id": 14
+      "id": 9
     }
   ],
   "authors": [

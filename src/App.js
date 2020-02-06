@@ -11,10 +11,18 @@ function App() {
     { label: "Courses", route: "/courses" },
     { label: "About", route: "/about" }
   ];
+
+  let style = {
+    hr: {
+      marginTop: "0px",
+      marginBottom: "32px"
+    }
+  };
   return (
     <Router>
       <div className="container">
         <Navbar items={navItems} />
+        <hr style={style.hr} />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About} />
