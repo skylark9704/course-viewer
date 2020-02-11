@@ -31,8 +31,8 @@ class AddCourse extends Component {
     const {
       addCourseStatus,
       getCoursesStatus,
-      courses,
-      editCourseStatus
+      editCourseStatus,
+      courses
     } = this.props;
 
     if (addCourseStatus.isFullfilled || editCourseStatus.isFullfilled) {
@@ -44,7 +44,6 @@ class AddCourse extends Component {
 
     if (this.slug && courses.length !== 0) {
       let courseIndex = courses.findIndex(course => {
-        console.log(course);
         return course.slug === this.slug;
       });
 

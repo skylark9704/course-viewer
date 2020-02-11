@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders input 1`] = `
+<div
+  className="form-group"
+>
+  <input
+    className="form-control"
+    defaultValue=""
+    name="input"
+    type="text"
+  />
+</div>
+`;

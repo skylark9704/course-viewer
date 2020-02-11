@@ -14,7 +14,7 @@ class Courses extends React.Component {
 
   render() {
     const {
-      getCoursesStatus: { isPending },
+      getCoursesStatus: { isPending, isCancelled },
       courses
     } = this.props;
     return (
@@ -23,7 +23,7 @@ class Courses extends React.Component {
         <hr />
         <AddCourse />
         <br />
-        <CourseList loading={isPending} items={courses} />
+        {!isCancelled ? <CourseList loading={isPending} items={courses} /> : <div>Please check with the API</div>}
       </div>
     );
   }

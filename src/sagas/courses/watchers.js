@@ -12,7 +12,7 @@ import {
 // Selectors
 export const getAuthorsFromState = state => state.authors.authorList;
 
-function* getCourses() {
+export function* getCourses() {
   const { SUCCESS, FAILURE, PENDING } = GET;
 
   yield put(PENDING());
@@ -106,3 +106,4 @@ export function* coursesSaga() {
   yield takeLatest(ADD_COURSE.SUCCESS, getCourses);
   yield takeLatest(EDIT_COURSE.SUCCESS, getCourses);
 }
+
