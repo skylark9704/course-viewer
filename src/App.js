@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/navbar";
 import Courses from "./components/courses";
@@ -19,7 +24,7 @@ function App() {
     }
   };
   return (
-    <Router>
+    <BrowserRouter>
       <div className="container">
         <Navbar items={navItems} />
         <hr style={style.hr} />
@@ -32,7 +37,7 @@ function App() {
           <Route path="*" component={PageNotFound} />
         </Switch>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

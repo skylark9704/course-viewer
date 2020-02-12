@@ -64,6 +64,14 @@
       "createdAt": 1580905544364,
       "slug": "the-angular-way-of-accessing-dom",
       "id": 9
+    },
+    {
+      "title": "Running Docker",
+      "authorId": 1,
+      "category": "Docker",
+      "createdAt": 1581416979858,
+      "slug": "running-docker",
+      "id": 10
     }
   ],
   "authors": [
