@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders input 1`] = `
+exports[`Testing Shared Input Component renders input 1`] = `
 <div
   className="form-group"
 >

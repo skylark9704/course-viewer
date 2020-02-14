@@ -9,11 +9,10 @@ function CourseList(props) {
     return <Loading />;
   }
   return (
-    <table
-      className="table
-    "
+    <table data-testid="courses-table"
+      className="table"
     >
-      <thead>
+      <thead data-testid="courses-table-head">
         <tr>
           <th></th>
           <th>
@@ -29,7 +28,7 @@ function CourseList(props) {
         </tr>
       </thead>
 
-      <tbody>
+      <tbody data-testid="courses-table-body">
         {items &&
           items.map((course, index) => (
             <CourseItem course={course} key={index} />

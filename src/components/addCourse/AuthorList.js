@@ -14,22 +14,22 @@ class AuthorList extends React.Component {
   };
 
   render() {
-    const { authors, required, value } = this.props;
+    const { authors, required, value, name } = this.props;
     return (
-      <div className="form-group">
-        <label>Authors</label>
-        <select
+      <div data-testid="author-list" className="form-group">
+        <label data-testid="label">Authors</label>
+        <select data-testid="select"
           required={required}
-          name="author"
+          name={name}
           className="form-control"
           defaultValue={value && value}
           onChange={this.onChange}
         >
-          <option value={null}>Choose</option>
+          <option data-testid="option" value={null}>Choose</option>
           {authors &&
             authors.map((author, index) => {
               return (
-                <option key={index} value={author.id}>
+                <option data-testid="option" key={index} value={author.id}>
                   {author.name}
                 </option>
               );

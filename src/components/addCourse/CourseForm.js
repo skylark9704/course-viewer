@@ -33,11 +33,11 @@ function CourseForm(props) {
   };
 
   return (
-    <div>
+    <div data-testid="course-form">
       <h3>{edit ? 'Edit Course' : 'Add Course'}</h3>
       <hr />
-      <form onSubmit={e => onFormSubmit(e)}>
-        <fieldset disabled={disabled}>
+      <form data-testid="form" onSubmit={e => onFormSubmit(e)}>
+        <fieldset data-testid="fieldset" disabled={disabled}>
           <InputComponent
             label="Title"
             type="text"
@@ -45,10 +45,13 @@ function CourseForm(props) {
             placeholder="Enter Course Title"
             required={true}
             value={courseData && courseData.title}
+            data-testid="input-title"
           />
           <AuthorList
+            name="author"
             value={courseData && courseData.authorId}
             required={true}
+            data-testid="author-list"
           />
           {/* onSelect Prop is Optional [Use-case: Captures onChange event of component as soon as its fired] */}
           <InputComponent
@@ -58,9 +61,10 @@ function CourseForm(props) {
             placeholder="Enter Course Category"
             required={true}
             value={courseData && courseData.category}
+            data-testid="input-category"
           />
-          <button type="submit" className="btn btn-primary">
-            {edit ? "Edit" : "Submit"}
+          <button data-testid="button-submit" type="submit" className="btn btn-primary">
+            {edit ? "Save Changes" : "Submit"}
           </button>
         </fieldset>
       </form>
